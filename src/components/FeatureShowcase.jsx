@@ -12,33 +12,53 @@ function FeatureShowcase() {
     }
   };
 
+  const ComingSoon = () => (
+    <div className="mt-8 pt-6 border-t border-border">
+      <div className="inline-block px-3 py-1 bg-accent/10 text-accent text-[10px] font-bold tracking-wider rounded-full mb-3 uppercase">
+        Coming Soon
+      </div>
+      <p className="text-sm text-muted mb-4">
+        We're building this experience for MASOOM's early-access launch.
+      </p>
+      <a 
+        href="#get-access" 
+        className="inline-flex items-center justify-center px-5 py-2.5 bg-foreground text-background font-medium rounded-full hover:bg-accent transition-colors text-sm w-full sm:w-auto"
+      >
+        Get Early Access
+      </a>
+    </div>
+  );
+
   const features = [
     {
       id: 1,
       title: "Cycle Tracking",
       description: "Keep a simple view of your cycle and understand your monthly patterns.",
       icon: "🌙",
-      renderUI: (isExpanded) => (
-        <div className="bg-background rounded-xl p-4 border border-border h-full flex flex-col">
+      capabilities: [
+        "Cycle calendar",
+        "Cycle-day overview",
+        "Pattern history"
+      ],
+      renderPreview: () => (
+        <div className="bg-background rounded-xl p-4 border border-border mt-6">
           <div className="flex justify-between items-center mb-4">
             <span className="font-medium text-foreground text-sm">Cycle Overview</span>
             <span className="text-xs text-muted">Day 14 of 28</span>
           </div>
-          <div className="flex-grow flex items-center justify-center py-4">
+          <div className="flex items-center justify-center py-4 mb-4">
              <div className="w-24 h-24 rounded-full border-4 border-accent/20 border-t-accent flex items-center justify-center">
                <span className="text-accent text-xs font-bold">Ovulation</span>
              </div>
           </div>
-          {isExpanded && (
-            <div className="mt-4 pt-4 border-t border-border animate-in fade-in slide-in-from-top-2 duration-300">
-               <div className="flex justify-between text-muted text-[10px] mb-2">
-                 <span>M</span><span>T</span><span>W</span><span className="text-accent font-bold">T</span><span>F</span><span>S</span><span>S</span>
-               </div>
-               <div className="flex justify-between text-foreground text-xs">
-                 <span>12</span><span>13</span><span className="bg-accent text-white w-5 h-5 flex items-center justify-center rounded-full">14</span><span>15</span><span>16</span><span>17</span><span>18</span>
-               </div>
-            </div>
-          )}
+          <div className="pt-4 border-t border-border">
+             <div className="flex justify-between text-muted text-[10px] mb-2">
+               <span>M</span><span>T</span><span>W</span><span className="text-accent font-bold">T</span><span>F</span><span>S</span><span>S</span>
+             </div>
+             <div className="flex justify-between text-foreground text-xs">
+               <span>12</span><span>13</span><span className="bg-accent text-white w-5 h-5 flex items-center justify-center rounded-full">14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+             </div>
+          </div>
         </div>
       )
     },
@@ -47,27 +67,30 @@ function FeatureShowcase() {
       title: "Doctor Consultation",
       description: "Explore a simple path from health questions to doctor consultations.",
       icon: "🩺",
-      renderUI: (isExpanded) => (
-        <div className="bg-background rounded-xl p-4 border border-border h-full flex flex-col">
+      capabilities: [
+        "Connect with specialists",
+        "View available slots",
+        "Simple booking flow"
+      ],
+      renderPreview: () => (
+        <div className="bg-background rounded-xl p-4 border border-border mt-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-full bg-accent-light flex items-center justify-center text-xs">👩‍⚕️</div>
             <div>
               <div className="font-medium text-foreground text-sm">Women's Health Specialist</div>
             </div>
           </div>
-          <div className="flex-grow flex flex-col justify-center">
+          <div className="mb-4">
             <p className="text-xs text-muted mb-3">Available times</p>
             <div className="flex gap-2">
               <span className="px-2 py-1 bg-card border border-border rounded text-[10px] text-foreground">09:30 AM</span>
               <span className="px-2 py-1 bg-card border border-border rounded text-[10px] text-foreground">11:00 AM</span>
             </div>
           </div>
-          {isExpanded && (
-            <div className="mt-4 pt-4 border-t border-border flex gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
-               <button className="flex-1 py-1.5 bg-card border border-border rounded-lg text-xs text-foreground hover:bg-accent/5">Chat</button>
-               <button className="flex-1 py-1.5 bg-accent/10 text-accent font-medium rounded-lg text-xs hover:bg-accent/20">View consultation</button>
-            </div>
-          )}
+          <div className="pt-4 border-t border-border flex gap-2">
+             <button className="flex-1 py-1.5 bg-card border border-border rounded-lg text-xs text-foreground">Chat</button>
+             <button className="flex-1 py-1.5 bg-accent/10 text-accent font-medium rounded-lg text-xs">View consultation</button>
+          </div>
         </div>
       )
     },
@@ -76,27 +99,25 @@ function FeatureShowcase() {
       title: "Health Education",
       description: "Explore approachable resources covering everyday women's health topics.",
       icon: "📖",
-      renderUI: (isExpanded) => (
-        <div className="bg-background rounded-xl p-4 border border-border h-full flex flex-col">
+      capabilities: [
+        "Curated articles",
+        "Cycle health basics",
+        "Everyday nutrition"
+      ],
+      renderPreview: () => (
+        <div className="bg-background rounded-xl p-4 border border-border mt-6">
           <div className="flex gap-2 mb-4 overflow-x-auto scrollbar-hide pb-1">
              <span className="text-[10px] font-medium text-accent bg-accent/10 px-2 py-0.5 rounded-full whitespace-nowrap">Cycle Health</span>
              <span className="text-[10px] font-medium text-muted bg-card border border-border px-2 py-0.5 rounded-full whitespace-nowrap">Nutrition</span>
-             <span className="text-[10px] font-medium text-muted bg-card border border-border px-2 py-0.5 rounded-full whitespace-nowrap">Wellness</span>
           </div>
-          <div className="flex-grow">
-            <div className="bg-card p-3 rounded-lg border border-border mb-2">
-              <h6 className="text-xs font-medium text-foreground mb-1">Understanding Your Cycle</h6>
-              <p className="text-[10px] text-muted">5 min read</p>
-            </div>
+          <div className="bg-card p-3 rounded-lg border border-border mb-2">
+            <h6 className="text-xs font-medium text-foreground mb-1">Understanding Your Cycle</h6>
+            <p className="text-[10px] text-muted">5 min read</p>
           </div>
-          {isExpanded && (
-            <div className="mt-2 animate-in fade-in slide-in-from-top-2 duration-300">
-               <div className="bg-card p-3 rounded-lg border border-border">
-                <h6 className="text-xs font-medium text-foreground mb-1">Everyday Nutrition Basics</h6>
-                <p className="text-[10px] text-muted">4 min read</p>
-              </div>
-            </div>
-          )}
+          <div className="bg-card p-3 rounded-lg border border-border">
+            <h6 className="text-xs font-medium text-foreground mb-1">Everyday Nutrition Basics</h6>
+            <p className="text-[10px] text-muted">4 min read</p>
+          </div>
         </div>
       )
     },
@@ -105,30 +126,29 @@ function FeatureShowcase() {
       title: "Anonymous Community",
       description: "Ask questions, share experiences, and participate without revealing your identity.",
       icon: "💬",
-      renderUI: (isExpanded) => (
-        <div className="bg-background rounded-xl p-4 border border-border h-full flex flex-col">
+      capabilities: [
+        "Private discussions",
+        "Anonymous posting",
+        "Supportive environment"
+      ],
+      renderPreview: () => (
+        <div className="bg-background rounded-xl p-4 border border-border mt-6">
           <h6 className="font-medium text-foreground text-sm mb-4">Anonymous Community</h6>
-          <div className="flex-grow">
-            <div className="bg-card p-3 rounded-lg border border-border mb-3 relative">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-5 h-5 rounded-full bg-accent/20"></div>
-                <span className="text-[10px] font-medium text-muted">Anonymous user</span>
-              </div>
-              <p className="text-foreground text-xs mb-2">"Has anyone experienced this before?"</p>
-              <div className="text-[10px] text-muted">12 replies</div>
+          <div className="bg-card p-3 rounded-lg border border-border mb-3">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-5 h-5 rounded-full bg-accent/20"></div>
+              <span className="text-[10px] font-medium text-muted">Anonymous user</span>
+            </div>
+            <p className="text-foreground text-xs mb-2">"Has anyone experienced this before?"</p>
+            <div className="text-[10px] text-muted">12 replies</div>
+          </div>
+          <div className="flex gap-2">
+            <div className="w-5 h-5 rounded-full bg-accent-light flex-shrink-0 mt-1"></div>
+            <div className="bg-card p-2 rounded-lg border border-border flex-grow">
+              <p className="text-foreground text-xs mb-1">"Sharing what helped me..."</p>
+              <span className="text-[10px] text-accent font-medium">Reply</span>
             </div>
           </div>
-          {isExpanded && (
-            <div className="animate-in fade-in slide-in-from-top-2 duration-300">
-              <div className="flex gap-2">
-                <div className="w-5 h-5 rounded-full bg-accent-light flex-shrink-0 mt-1"></div>
-                <div className="bg-card p-2 rounded-lg border border-border flex-grow">
-                  <p className="text-foreground text-xs mb-1">"Sharing what helped me..."</p>
-                  <button className="text-[10px] text-accent font-medium">Reply</button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       )
     }
@@ -154,10 +174,10 @@ function FeatureShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card rounded-3xl p-6 sm:p-8 border border-border shadow-sm flex flex-col h-full"
+              className="bg-card rounded-3xl p-6 sm:p-8 border border-border shadow-sm flex flex-col h-full overflow-hidden transition-all duration-300"
             >
               <div className="flex items-start gap-4 mb-6">
-                <div className="text-3xl bg-background w-12 h-12 flex items-center justify-center rounded-xl border border-border">
+                <div className="text-3xl bg-background w-12 h-12 flex items-center justify-center rounded-xl border border-border shrink-0">
                   {feature.icon}
                 </div>
                 <div>
@@ -166,13 +186,34 @@ function FeatureShowcase() {
                 </div>
               </div>
 
-              <div className="flex-grow mb-6 min-h-[160px]">
-                {feature.renderUI(expandedCard === feature.id)}
-              </div>
+              {expandedCard === feature.id && (
+                <div className="animate-in fade-in slide-in-from-top-4 duration-300 flex-grow flex flex-col">
+                  
+                  <div className="mb-6">
+                    <h4 className="text-sm font-medium text-foreground mb-3 uppercase tracking-wider">Capabilities</h4>
+                    <ul className="space-y-2">
+                      {feature.capabilities.map((cap, i) => (
+                        <li key={i} className="flex items-center gap-2 text-sm text-muted">
+                          <span className="text-accent">•</span> {cap}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <h4 className="text-sm font-medium text-foreground uppercase tracking-wider">Preview</h4>
+                  {feature.renderPreview()}
+                  
+                  <div className="mt-auto">
+                    <ComingSoon />
+                  </div>
+                </div>
+              )}
 
               <button 
                 onClick={() => toggleExpand(feature.id)}
-                className="mt-auto text-accent font-medium text-sm hover:text-accent-hover transition-colors flex items-center gap-1 w-max"
+                className={`text-accent font-medium text-sm hover:text-accent-hover transition-colors flex items-center gap-1 w-max ${
+                  expandedCard === feature.id ? 'mt-8' : 'mt-auto'
+                }`}
               >
                 {expandedCard === feature.id ? 'Close preview ↑' : 'Explore preview →'}
               </button>
