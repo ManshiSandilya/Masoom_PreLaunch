@@ -18,6 +18,83 @@ function InteractiveExplorer() {
     { id: 4, title: 'Connect privately' },
   ];
 
+  const renderHelpPreview = (id) => {
+    switch (id) {
+      case 1:
+        return (
+          <div className="w-full max-w-sm animate-in fade-in duration-300">
+            <div className="bg-background border border-border rounded-2xl p-6">
+              <h4 className="text-lg font-medium text-foreground mb-6">Cycle Overview</h4>
+              <div className="flex items-center justify-center w-32 h-32 rounded-full border-4 border-accent/20 border-t-accent mx-auto mb-6">
+                <div className="text-center">
+                  <span className="block text-2xl font-bold text-foreground">Day 14</span>
+                  <span className="text-sm text-muted">of 28</span>
+                </div>
+              </div>
+              <div className="text-center text-sm font-medium text-accent">Ovulation Phase</div>
+            </div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="w-full max-w-sm animate-in fade-in duration-300">
+            <div className="bg-background border border-border rounded-2xl p-6">
+              <h4 className="text-lg font-medium text-foreground mb-4">Latest Articles</h4>
+              <div className="space-y-4">
+                <div className="p-4 bg-card border border-border rounded-xl">
+                  <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Nutrition</span>
+                  <h5 className="font-medium text-foreground">Everyday Nutrition Basics</h5>
+                  <p className="text-sm text-muted mt-1">4 min read</p>
+                </div>
+                <div className="p-4 bg-card border border-border rounded-xl">
+                  <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Wellness</span>
+                  <h5 className="font-medium text-foreground">Understanding Common Symptoms</h5>
+                  <p className="text-sm text-muted mt-1">5 min read</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="w-full max-w-sm animate-in fade-in duration-300">
+            <div className="bg-background border border-border rounded-2xl p-6">
+              <h4 className="text-lg font-medium text-foreground mb-2">Women's Health Specialist</h4>
+              <p className="text-sm text-muted mb-6">Available consultation slots</p>
+              <div className="space-y-3">
+                {['09:30 AM', '11:00 AM', '02:30 PM'].map((time) => (
+                  <div key={time} className="p-3 border border-border rounded-xl flex justify-between items-center bg-card">
+                    <span className="text-foreground font-medium">{time}</span>
+                    <button className="text-sm text-accent font-medium px-3 py-1 bg-accent/10 rounded-lg">Select</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      case 4:
+        return (
+          <div className="w-full max-w-sm animate-in fade-in duration-300">
+            <div className="bg-background border border-border rounded-2xl p-6">
+              <h4 className="text-lg font-medium text-foreground mb-4">Anonymous Community</h4>
+              <div className="space-y-4">
+                <div className="p-4 bg-card border border-border rounded-xl">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 rounded-full bg-accent/20"></div>
+                    <span className="text-sm font-medium text-muted">Anonymous user</span>
+                  </div>
+                  <p className="text-foreground text-sm mb-3">"Has anyone experienced something similar?"</p>
+                  <span className="text-xs text-muted">12 replies</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <section className="py-20 bg-background transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -30,96 +107,38 @@ function InteractiveExplorer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="flex flex-col gap-4">
               {helpOptions.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => setSelectedHelp(option.id)}
-                  className={`text-left p-6 rounded-2xl border transition-all duration-300 ${
-                    selectedHelp === option.id
-                      ? 'border-accent bg-accent/5 ring-1 ring-accent'
-                      : 'border-border bg-card hover:border-accent/50'
-                  }`}
-                >
-                  <div className="text-3xl mb-3">{option.icon}</div>
-                  <h3 className="text-xl font-medium text-foreground mb-1">{option.title}</h3>
-                  <p className="text-muted mb-4">{option.desc}</p>
-                  <span className={`text-sm font-medium ${selectedHelp === option.id ? 'text-accent' : 'text-muted'}`}>
-                    Explore &rarr;
-                  </span>
-                </button>
+                <div key={option.id} className="flex flex-col gap-4">
+                  <button
+                    onClick={() => setSelectedHelp(option.id)}
+                    className={`text-left p-6 rounded-2xl border transition-all duration-300 w-full ${
+                      selectedHelp === option.id
+                        ? 'border-accent bg-accent/5 ring-1 ring-accent'
+                        : 'border-border bg-card hover:border-accent/50'
+                    }`}
+                  >
+                    <div className="text-3xl mb-3">{option.icon}</div>
+                    <h3 className="text-xl font-medium text-foreground mb-1">{option.title}</h3>
+                    <p className="text-muted mb-4">{option.desc}</p>
+                    <span className={`text-sm font-medium ${selectedHelp === option.id ? 'text-accent' : 'text-muted'}`}>
+                      {selectedHelp === option.id ? 'Viewing preview ↓' : 'Explore →'}
+                    </span>
+                  </button>
+                  {/* Mobile Preview Inline */}
+                  {selectedHelp === option.id && (
+                    <div className="lg:hidden bg-card border border-border rounded-3xl p-6 shadow-sm flex items-center justify-center mb-4">
+                      {renderHelpPreview(selectedHelp)}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
 
-            {/* Preview Panel for "What brings you here?" */}
-            <div className="bg-card border border-border rounded-3xl p-8 shadow-sm flex items-center justify-center min-h-[400px]">
-              {selectedHelp === 1 && (
-                <div className="w-full max-w-sm">
-                  <div className="bg-background border border-border rounded-2xl p-6">
-                    <h4 className="text-lg font-medium text-foreground mb-6">Cycle Overview</h4>
-                    <div className="flex items-center justify-center w-32 h-32 rounded-full border-4 border-accent/20 border-t-accent mx-auto mb-6">
-                      <div className="text-center">
-                        <span className="block text-2xl font-bold text-foreground">Day 14</span>
-                        <span className="text-sm text-muted">of 28</span>
-                      </div>
-                    </div>
-                    <div className="text-center text-sm font-medium text-accent">Ovulation Phase</div>
-                  </div>
-                </div>
-              )}
-              {selectedHelp === 2 && (
-                <div className="w-full max-w-sm">
-                  <div className="bg-background border border-border rounded-2xl p-6">
-                    <h4 className="text-lg font-medium text-foreground mb-4">Latest Articles</h4>
-                    <div className="space-y-4">
-                      <div className="p-4 bg-card border border-border rounded-xl">
-                        <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Nutrition</span>
-                        <h5 className="font-medium text-foreground">Everyday Nutrition Basics</h5>
-                        <p className="text-sm text-muted mt-1">4 min read</p>
-                      </div>
-                      <div className="p-4 bg-card border border-border rounded-xl">
-                        <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Wellness</span>
-                        <h5 className="font-medium text-foreground">Understanding Common Symptoms</h5>
-                        <p className="text-sm text-muted mt-1">5 min read</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {selectedHelp === 3 && (
-                <div className="w-full max-w-sm">
-                  <div className="bg-background border border-border rounded-2xl p-6">
-                    <h4 className="text-lg font-medium text-foreground mb-2">Women's Health Specialist</h4>
-                    <p className="text-sm text-muted mb-6">Available consultation slots</p>
-                    <div className="space-y-3">
-                      {['09:30 AM', '11:00 AM', '02:30 PM'].map((time) => (
-                        <div key={time} className="p-3 border border-border rounded-xl flex justify-between items-center bg-card">
-                          <span className="text-foreground font-medium">{time}</span>
-                          <button className="text-sm text-accent font-medium px-3 py-1 bg-accent/10 rounded-lg">Select</button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-              {selectedHelp === 4 && (
-                <div className="w-full max-w-sm">
-                  <div className="bg-background border border-border rounded-2xl p-6">
-                    <h4 className="text-lg font-medium text-foreground mb-4">Anonymous Community</h4>
-                    <div className="space-y-4">
-                      <div className="p-4 bg-card border border-border rounded-xl">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-6 h-6 rounded-full bg-accent/20"></div>
-                          <span className="text-sm font-medium text-muted">Anonymous user</span>
-                        </div>
-                        <p className="text-foreground text-sm mb-3">"Has anyone experienced something similar?"</p>
-                        <span className="text-xs text-muted">12 replies</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+            {/* Desktop Preview Panel */}
+            <div className="hidden lg:flex bg-card border border-border rounded-3xl p-8 shadow-sm items-center justify-center min-h-[400px] sticky top-32">
+              {renderHelpPreview(selectedHelp)}
             </div>
           </div>
         </div>
@@ -158,12 +177,12 @@ function InteractiveExplorer() {
 
             {/* Phone UI Right */}
             <div className="w-full lg:w-1/2 flex justify-center">
-              <div className="w-[320px] h-[640px] bg-background border-[8px] border-border rounded-[3rem] relative shadow-xl overflow-hidden">
+              <div className="w-[320px] h-[640px] bg-card border-[8px] border-muted/30 rounded-[3rem] relative shadow-2xl overflow-hidden ring-1 ring-border">
                 {/* Phone Notch */}
-                <div className="absolute top-0 inset-x-0 h-6 bg-border w-40 mx-auto rounded-b-3xl z-20"></div>
+                <div className="absolute top-0 inset-x-0 h-6 bg-muted/30 w-40 mx-auto rounded-b-3xl z-20 backdrop-blur-sm"></div>
                 
                 {/* Phone Screen Content */}
-                <div className="h-full w-full bg-background pt-12 px-6 pb-6 overflow-y-auto">
+                <div className="h-full w-full bg-background pt-12 px-6 pb-12 overflow-y-auto">
                   {selectedExplorer === 1 && (
                     <div className="animate-in fade-in duration-500">
                       <h4 className="text-xl font-serif text-foreground mb-6">Your Cycle</h4>

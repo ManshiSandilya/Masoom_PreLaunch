@@ -26,7 +26,7 @@ function Hero() {
 
           {/* Right: Interactive Product Preview */}
           <div className="w-full lg:w-1/2">
-            <div className="bg-card rounded-3xl p-6 sm:p-8 border border-border shadow-lg relative overflow-hidden">
+            <div className="bg-card rounded-3xl p-6 sm:p-8 border border-border shadow-lg relative">
               
               {/* Fake UI Header */}
               <div className="flex justify-between items-center mb-8 border-b border-border pb-4">

@@ -297,7 +297,7 @@ function FeatureShowcase() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {features.map((feature, index) => (
             <motion.div
               key={feature.id}
@@ -305,7 +305,7 @@ function FeatureShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card rounded-3xl p-6 sm:p-8 border border-border shadow-sm flex flex-col h-full transition-all duration-300"
+              className="bg-card rounded-3xl p-6 sm:p-8 border border-border shadow-sm flex flex-col transition-all duration-300"
             >
               <div className="flex items-start gap-4 mb-6">
                 <div className="text-3xl bg-background w-12 h-12 flex items-center justify-center rounded-xl border border-border shrink-0 shadow-sm">
