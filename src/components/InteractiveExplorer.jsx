@@ -1,106 +1,35 @@
 import { useState } from 'react';
+import { helpOptions, explorerSteps } from '../data/constants';
+import CycleOverview from './previews/CycleOverview';
+import LatestArticles from './previews/LatestArticles';
+import SpecialistSlots from './previews/SpecialistSlots';
+import AnonymousCommunity from './previews/AnonymousCommunity';
 
 function InteractiveExplorer() {
   const [selectedHelp, setSelectedHelp] = useState(1);
   const [selectedExplorer, setSelectedExplorer] = useState(1);
 
-  const helpOptions = [
-    { id: 1, icon: '🌙', title: 'Understand my cycle', desc: 'Track and understand patterns' },
-    { id: 2, icon: '📖', title: 'Learn about my health', desc: 'Explore approachable resources' },
-    { id: 3, icon: '🩺', title: 'Talk to a doctor', desc: 'Find a consultation easily' },
-    { id: 4, icon: '💬', title: 'Find a private community', desc: 'Ask questions anonymously' },
-  ];
-
-  const explorerSteps = [
-    { id: 1, title: 'Track your cycle' },
-    { id: 2, title: 'Learn what matters' },
-    { id: 3, title: 'Consult when needed' },
-    { id: 4, title: 'Connect privately' },
-  ];
-
   const renderHelpPreview = (id) => {
     switch (id) {
       case 1:
-        return (
-          <div className="w-full max-w-sm animate-in fade-in duration-300">
-            <div className="bg-background border border-border rounded-2xl p-6">
-              <h4 className="text-lg font-medium text-foreground mb-6">Cycle Overview</h4>
-              <div className="flex items-center justify-center w-32 h-32 rounded-full border-4 border-accent/20 border-t-accent mx-auto mb-6">
-                <div className="text-center">
-                  <span className="block text-2xl font-bold text-foreground">Day 14</span>
-                  <span className="text-sm text-muted">of 28</span>
-                </div>
-              </div>
-              <div className="text-center text-sm font-medium text-accent">Ovulation Phase</div>
-            </div>
-          </div>
-        );
+        return <CycleOverview />;
       case 2:
-        return (
-          <div className="w-full max-w-sm animate-in fade-in duration-300">
-            <div className="bg-background border border-border rounded-2xl p-6">
-              <h4 className="text-lg font-medium text-foreground mb-4">Latest Articles</h4>
-              <div className="space-y-4">
-                <div className="p-4 bg-card border border-border rounded-xl">
-                  <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Nutrition</span>
-                  <h5 className="font-medium text-foreground">Everyday Nutrition Basics</h5>
-                  <p className="text-sm text-muted mt-1">4 min read</p>
-                </div>
-                <div className="p-4 bg-card border border-border rounded-xl">
-                  <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Wellness</span>
-                  <h5 className="font-medium text-foreground">Understanding Common Symptoms</h5>
-                  <p className="text-sm text-muted mt-1">5 min read</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        return <LatestArticles />;
       case 3:
-        return (
-          <div className="w-full max-w-sm animate-in fade-in duration-300">
-            <div className="bg-background border border-border rounded-2xl p-6">
-              <h4 className="text-lg font-medium text-foreground mb-2">Women's Health Specialist</h4>
-              <p className="text-sm text-muted mb-6">Available consultation slots</p>
-              <div className="space-y-3">
-                {['09:30 AM', '11:00 AM', '02:30 PM'].map((time) => (
-                  <div key={time} className="p-3 border border-border rounded-xl flex justify-between items-center bg-card">
-                    <span className="text-foreground font-medium">{time}</span>
-                    <button className="text-sm text-accent font-medium px-3 py-1 bg-accent/10 rounded-lg">Select</button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
+        return <SpecialistSlots />;
       case 4:
-        return (
-          <div className="w-full max-w-sm animate-in fade-in duration-300">
-            <div className="bg-background border border-border rounded-2xl p-6">
-              <h4 className="text-lg font-medium text-foreground mb-4">Anonymous Community</h4>
-              <div className="space-y-4">
-                <div className="p-4 bg-card border border-border rounded-xl">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 rounded-full bg-accent/20"></div>
-                    <span className="text-sm font-medium text-muted">Anonymous user</span>
-                  </div>
-                  <p className="text-foreground text-sm mb-3">"Has anyone experienced something similar?"</p>
-                  <span className="text-xs text-muted">12 replies</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        return <AnonymousCommunity />;
       default:
         return null;
     }
   };
 
   return (
-    <section className="py-20 bg-background transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* What brings you here? */}
-        <div className="mb-32">
-          <div className="text-center mb-12">
+    <div className="bg-background transition-colors duration-300">
+      {/* What brings you here? */}
+      <section className="min-h-screen pt-32 pb-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl sm:text-4xl font-serif text-foreground mb-4">What would you like help with?</h2>
             <p className="text-muted max-w-2xl mx-auto text-lg">
               Explore what MASOOM is designed to bring together.
@@ -142,9 +71,11 @@ function InteractiveExplorer() {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* See MASOOM in action */}
-        <div>
+      {/* See MASOOM in action */}
+      <section className="min-h-screen pt-32 pb-16 border-t border-border/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif text-foreground mb-4">See MASOOM in action.</h2>
             <p className="text-muted max-w-2xl mx-auto text-lg">
@@ -159,30 +90,54 @@ function InteractiveExplorer() {
                 <button
                   key={step.id}
                   onClick={() => setSelectedExplorer(step.id)}
-                  className={`text-left p-6 rounded-2xl transition-all duration-300 flex items-center gap-6 ${
+                  className={`text-left p-6 rounded-2xl border transition-all duration-300 flex items-center gap-6 w-full ${
                     selectedExplorer === step.id
-                      ? 'bg-card border border-border shadow-sm'
-                      : 'hover:bg-card/50'
+                      ? 'bg-card border-accent/40 shadow-md ring-1 ring-accent/15'
+                      : 'bg-card/25 border-border/40 hover:bg-card/50 hover:border-border/80'
                   }`}
                 >
-                  <span className={`text-2xl font-serif ${selectedExplorer === step.id ? 'text-accent' : 'text-muted/50'}`}>
+                  <span className={`text-2xl font-serif transition-colors duration-300 ${selectedExplorer === step.id ? 'text-accent' : 'text-muted/50'}`}>
                     0{step.id}
                   </span>
-                  <span className={`text-xl font-medium ${selectedExplorer === step.id ? 'text-foreground' : 'text-muted'}`}>
+                  <span className={`text-xl font-medium transition-colors duration-300 ${selectedExplorer === step.id ? 'text-foreground' : 'text-muted'}`}>
                     {step.title}
                   </span>
                 </button>
               ))}
             </div>
 
-            {/* Phone UI Right */}
+            {/* Workspace UI Right */}
             <div className="w-full lg:w-1/2 flex justify-center">
-              <div className="w-[320px] h-[640px] bg-card border-[8px] border-muted/30 rounded-[3rem] relative shadow-2xl overflow-hidden ring-1 ring-border">
-                {/* Phone Notch */}
-                <div className="absolute top-0 inset-x-0 h-6 bg-muted/30 w-40 mx-auto rounded-b-3xl z-20 backdrop-blur-sm"></div>
-                
-                {/* Phone Screen Content */}
-                <div className="h-full w-full bg-background pt-12 px-6 pb-12 overflow-y-auto">
+              <div className="relative w-full max-w-[420px]">
+                {/* Background glow */}
+                <div className="absolute inset-0 bg-accent/5 blur-[80px] rounded-full scale-125 pointer-events-none"></div>
+
+                {/* Premium Workspace Card Container */}
+                <div className="w-full bg-card/60 backdrop-blur-md border border-border rounded-[2.5rem] p-6 sm:p-8 shadow-2xl relative overflow-hidden transition-all duration-300">
+                  {/* Decorative background accent highlights */}
+                  <div className="absolute -top-12 -left-12 w-32 h-32 bg-accent/10 rounded-full blur-2xl pointer-events-none"></div>
+                  <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-accent-light/30 rounded-full blur-3xl pointer-events-none"></div>
+
+                  {/* Header bar representing the secure space */}
+                  <div className="flex justify-between items-center mb-6 border-b border-border/60 pb-4 relative z-10">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-accent">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                      </div>
+                      <div className="text-left">
+                        <span className="text-[10px] font-semibold tracking-wider text-accent uppercase block">Personal Sanctuary</span>
+                        <span className="text-sm font-medium text-foreground">Secure Sandbox</span>
+                      </div>
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-medium text-muted bg-background border border-border px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+                      <span className="w-2 h-2 rounded-full bg-green-400"></span> Live Preview
+                    </span>
+                  </div>
+
+                  {/* Interactive Workspace Area */}
+                  <div className="relative z-10 min-h-[380px] bg-background/50 border border-border/50 rounded-2xl p-4 sm:p-6 shadow-inner">
                   {selectedExplorer === 1 && (
                     <div className="animate-in fade-in duration-500">
                       <h4 className="text-xl font-serif text-foreground mb-6">Your Cycle</h4>
@@ -210,7 +165,31 @@ function InteractiveExplorer() {
                       <h4 className="text-xl font-serif text-foreground mb-6">Learn</h4>
                       <div className="space-y-4">
                         <div className="bg-card p-4 rounded-2xl border border-border">
-                          <div className="w-full h-32 bg-accent-light rounded-xl mb-4"></div>
+                          <div className="w-full h-32 bg-gradient-to-br from-accent/20 to-accent-light rounded-xl mb-4 flex items-center justify-center relative overflow-hidden">
+                            {/* Decorative background blur patterns */}
+                            <div className="absolute -top-10 -left-10 w-24 h-24 rounded-full bg-accent/15 blur-xl"></div>
+                            <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-accent/30 blur-xl"></div>
+                            
+                            {/* Logo Wrapper */}
+                            <div className="w-16 h-16 rounded-full bg-card/60 backdrop-blur-sm border border-accent/20 flex items-center justify-center shadow-md">
+                              <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="1.5" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                className="w-9 h-9 text-accent"
+                              >
+                                <path d="M13 16a3 3 0 0 1 2.24 5"/>
+                                <path d="M18 12h.01"/>
+                                <path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/>
+                                <path d="M20 8.54V4a2 2 0 1 0-4 0v3"/>
+                                <path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/>
+                              </svg>
+                            </div>
+                          </div>
                           <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full mb-2 inline-block">Cycle Health</span>
                           <h5 className="font-medium text-foreground text-lg mb-1">Understanding Your Cycle</h5>
                           <p className="text-sm text-muted">5 min read</p>
@@ -274,13 +253,14 @@ function InteractiveExplorer() {
                       </div>
                     </div>
                   )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 

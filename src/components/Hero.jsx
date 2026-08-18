@@ -4,21 +4,41 @@ function Hero() {
   const [activeFeature, setActiveFeature] = useState("cycle");
 
   return (
-    <section className="py-16 md:py-32 bg-background transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="min-h-screen pt-28 pb-16 bg-background transition-colors duration-300 flex items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
           {/* Left: Content */}
           <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
+            {/* Announcement Pill to fill space */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-8">
+              <span className="text-lg leading-none">✨</span>
+              We're building the future of women's health
+            </div>
+            
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-foreground leading-[1.1] mb-6">
               Understand your health.<br />On your terms.
             </h1>
-            <p className="text-lg sm:text-xl text-muted mb-10 max-w-lg">
+            <p className="text-lg sm:text-xl text-muted mb-8 max-w-lg">
               Track your cycle, explore health resources, consult doctors, and find private community support.
             </p>
+            <ul className="flex flex-col gap-3 mb-10">
+              <li className="flex items-center gap-3 text-foreground">
+                <span className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs">✓</span>
+                Planned end-to-end encryption for privacy
+              </li>
+              <li className="flex items-center gap-3 text-foreground">
+                <span className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs">✓</span>
+                Designed for seamless doctor bookings
+              </li>
+              <li className="flex items-center gap-3 text-foreground">
+                <span className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs">✓</span>
+                Upcoming AI health assistant integration
+              </li>
+            </ul>
             <a 
               href="#get-access" 
-              className="px-8 py-4 rounded-full bg-accent text-white font-medium hover:bg-accent-hover transition-colors text-lg inline-flex items-center gap-2"
+              className="px-8 py-4 rounded-full bg-accent text-white font-medium hover:bg-accent-hover hover:scale-[1.02] active:scale-[0.98] transition-[transform,background-color] duration-200 text-lg inline-flex items-center gap-2 shadow-lg"
             >
               Get Early Access &rarr;
             </a>
@@ -34,7 +54,9 @@ function Hero() {
                   <h3 className="text-foreground font-serif text-xl">MASOOM</h3>
                   <p className="text-muted text-sm mt-1">Good morning</p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-accent-light"></div>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent-light flex items-center justify-center text-white text-sm font-serif shadow-md">
+                  M
+                </div>
               </div>
 
               <h4 className="text-lg font-medium text-foreground mb-6">Your health space</h4>
@@ -50,9 +72,9 @@ function Hero() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveFeature(tab.id)}
-                    className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors ${
+                    className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-[transform,background-color] duration-200 transform hover:scale-[1.02] active:scale-[0.98] ${
                       activeFeature === tab.id
-                        ? 'bg-accent text-white'
+                        ? 'bg-accent text-white shadow-sm'
                         : 'bg-background text-foreground border border-border hover:bg-accent/5'
                     }`}
                   >
