@@ -90,7 +90,7 @@ function InteractiveExplorer() {
                 <button
                   key={step.id}
                   onClick={() => setSelectedExplorer(step.id)}
-                  className={`text-left p-6 rounded-2xl border transition-all duration-300 flex items-center gap-6 w-full group ${
+                  className={`text-left p-6 rounded-2xl border transition-all duration-300 flex items-center gap-6 w-full ${
                     selectedExplorer === step.id
                       ? 'bg-card border-accent/40 shadow-md ring-1 ring-accent/15'
                       : 'bg-card/25 border-border/40 hover:bg-card/50 hover:border-border/80'
@@ -102,28 +102,6 @@ function InteractiveExplorer() {
                   <span className={`text-xl font-medium transition-colors duration-300 ${selectedExplorer === step.id ? 'text-foreground' : 'text-muted'}`}>
                     {step.title}
                   </span>
-                  {/* Decorative flower indicator on the right */}
-                  <svg 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor" 
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`ml-auto w-5 h-5 transition-all duration-700 ease-out ${
-                      selectedExplorer === step.id 
-                        ? 'text-accent animate-[spin_8s_linear_infinite] opacity-100' 
-                        : 'text-muted/20 opacity-0 group-hover:opacity-100 group-hover:rotate-90 group-hover:text-accent/40'
-                    }`}
-                  >
-                    {[0, 72, 144, 216, 288].map((angle) => (
-                      <path
-                        key={angle}
-                        d="M12 4C10.5 4 9 7 9.8 9.5C10.2 11 11.2 12 12 12C12.8 12 13.8 11 14.2 9.5C15 7 13.5 4 12 4Z"
-                        transform={`rotate(${angle} 12 12)`}
-                      />
-                    ))}
-                    <circle cx="12" cy="12" r="2" fill="currentColor" />
-                  </svg>
                 </button>
               ))}
             </div>

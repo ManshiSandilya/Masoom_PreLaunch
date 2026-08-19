@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Hero() {
   const [activeFeature, setActiveFeature] = useState("cycle");
+  const [breathingPhase, setBreathingPhase] = useState("Inhale");
+  const [mood, setMood] = useState("calm");
+
+  useEffect(() => {
+    let count = 0;
+    const interval = setInterval(() => {
+      count = (count + 1) % 3;
+      if (count === 0) setBreathingPhase("Inhale");
+      else if (count === 1) setBreathingPhase("Hold");
+      else setBreathingPhase("Exhale");
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="min-h-screen pt-28 pb-16 bg-background transition-colors duration-300 flex items-center">
+    <section className="min-h-screen pt-24 sm:pt-28 pb-16 bg-background transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
@@ -67,7 +80,8 @@ function Hero() {
                   { id: 'cycle', label: 'Cycle' },
                   { id: 'learn', label: 'Learn' },
                   { id: 'consult', label: 'Consult' },
-                  { id: 'community', label: 'Community' }
+                  { id: 'community', label: 'Community' },
+                  { id: 'mindful', label: 'Mindful' }
                 ].map((tab) => (
                   <button
                     key={tab.id}
@@ -170,6 +184,59 @@ function Hero() {
                         </div>
                         <p className="text-foreground text-sm mb-3">"Sharing what helped me..."</p>
                         <div className="text-xs text-muted">8 replies</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeFeature === "mindful" && (
+                  <div className="animate-in fade-in duration-300">
+                    <h5 className="text-foreground font-medium mb-4">Breathe & Center</h5>
+                    <p className="text-xs text-muted mb-6">A peaceful workspace designed to support your mental and emotional well-being.</p>
+                    
+                    {/* Calming interactive container */}
+                    <div className={`p-6 rounded-2xl border transition-all duration-700 mb-4 ${
+                      mood === 'calm' ? 'bg-gradient-to-br from-teal-500/5 to-blue-500/5 border-teal-500/20 shadow-[inset_0_1px_2px_rgba(20,180,180,0.05)]' :
+                      mood === 'tired' ? 'bg-gradient-to-br from-orange-500/5 to-rose-500/5 border-orange-500/20 shadow-[inset_0_1px_2px_rgba(240,100,100,0.05)]' :
+                      'bg-gradient-to-br from-amber-500/5 to-yellow-500/5 border-amber-500/20 shadow-[inset_0_1px_2px_rgba(240,200,50,0.05)]'
+                    }`}>
+                      {/* Breathing Circle */}
+                      <div className="min-h-[140px] flex items-center justify-center mb-6">
+                        <div 
+                          className={`rounded-full border flex flex-col items-center justify-center mx-auto transition-all duration-[4000ms] ease-in-out ${
+                            breathingPhase === "Inhale" || breathingPhase === "Hold"
+                              ? 'w-32 h-32 bg-accent/20 border-accent shadow-[0_0_30px_rgba(201,130,118,0.25)]'
+                              : 'w-24 h-24 bg-accent/5 border-accent/30 shadow-none'
+                          }`}
+                        >
+                          <span className="text-xs font-semibold text-accent uppercase tracking-wider transition-all duration-300">
+                            {breathingPhase}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Mood check-in */}
+                      <div className="text-center">
+                        <p className="text-[10px] uppercase tracking-wider text-muted font-medium mb-3">How are you feeling right now?</p>
+                        <div className="flex gap-2 justify-center">
+                          {[
+                            { id: 'calm', label: '😌 Calm' },
+                            { id: 'tired', label: '🥱 Tired' },
+                            { id: 'energetic', label: '⚡ Energized' }
+                          ].map((option) => (
+                            <button
+                              key={option.id}
+                              onClick={() => setMood(option.id)}
+                              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                                mood === option.id
+                                  ? 'bg-foreground text-background scale-[1.02] shadow-sm'
+                                  : 'bg-background text-foreground border border-border hover:bg-accent/5'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>

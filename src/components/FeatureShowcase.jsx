@@ -44,36 +44,12 @@ function FeatureShowcase() {
                   layout: { duration: 0.4, ease: "easeInOut" },
                   opacity: { duration: 0.5 }
                 }}
-                className={`bg-card rounded-3xl p-6 sm:p-8 border flex flex-col overflow-hidden relative group transition-[border-color,box-shadow] duration-300 ease-out ${
+                className={`bg-card rounded-3xl p-6 sm:p-8 border flex flex-col overflow-hidden transition-[border-color,box-shadow] duration-300 ease-out ${
                   isExpanded 
                     ? 'md:col-span-2 ring-1 ring-accent/20 border-border cursor-pointer shadow-sm' 
                     : 'border-border hover:border-accent/40 hover:shadow-md cursor-pointer shadow-sm'
                 }`}
               >
-                {/* Spinning Flower in Top-Right Corner */}
-                <div className="absolute top-6 right-6 text-accent/15 pointer-events-none z-20">
-                  <svg 
-                    width="24" 
-                    height="24" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor" 
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`w-6 h-6 transition-all duration-700 ease-out ${
-                      isExpanded 
-                        ? 'text-accent/50 animate-[spin_8s_linear_infinite]' 
-                        : 'group-hover:rotate-90 group-hover:scale-110 group-hover:text-accent/30'
-                    }`}
-                  >
-                    {[0, 72, 144, 216, 288].map((angle) => (
-                      <path
-                        key={angle}
-                        d="M12 4C10.5 4 9 7 9.8 9.5C10.2 11 11.2 12 12 12C12.8 12 13.8 11 14.2 9.5C15 7 13.5 4 12 4Z"
-                        transform={`rotate(${angle} 12 12)`}
-                      />
-                    ))}
-                    <circle cx="12" cy="12" r="2" fill="currentColor" className="opacity-80" />
-                  </svg>
-                </div>
                 <div className={`flex flex-col h-full ${isExpanded ? 'md:flex-row md:gap-12' : ''}`}>
                   
                   {/* Left Side (or Top on mobile/closed) */}
