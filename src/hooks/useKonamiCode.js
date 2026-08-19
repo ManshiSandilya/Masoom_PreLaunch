@@ -18,7 +18,6 @@ export function useKonamiCode() {
       if (keyMatches) {
         konamiIndex++;
         if (konamiIndex === konamiCode.length) {
-          console.log("🌸 Konami Code Triggered!");
           const id = Date.now();
           setActiveTriggers(prev => [...prev, id]);
           setTimeout(() => {
