@@ -43,7 +43,7 @@ function App() {
   }, [activeTriggers]);
 
   return (
-    <div className="min-h-screen font-sans selection:bg-accent/20 relative">
+    <div className="min-h-screen font-sans selection:bg-accent/20 relative overflow-x-hidden">
       <BackgroundDecorations />
       
       <AnimatePresence>
