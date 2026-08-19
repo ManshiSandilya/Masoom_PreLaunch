@@ -85,29 +85,55 @@ function InteractiveExplorer() {
 
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             {/* Steps Left */}
-            <div className="w-full lg:w-1/2 flex flex-col gap-2">
+            <div className="w-full lg:w-1/2 flex flex-col gap-3">
               {explorerSteps.map((step) => (
-                <button
-                  key={step.id}
-                  onClick={() => setSelectedExplorer(step.id)}
-                  className={`text-left p-6 rounded-2xl border transition-all duration-300 flex items-center gap-6 w-full ${
-                    selectedExplorer === step.id
-                      ? 'bg-card border-accent/40 shadow-md ring-1 ring-accent/15'
-                      : 'bg-card/25 border-border/40 hover:bg-card/50 hover:border-border/80'
-                  }`}
-                >
-                  <span className={`text-2xl font-serif transition-colors duration-300 ${selectedExplorer === step.id ? 'text-accent' : 'text-muted/50'}`}>
-                    0{step.id}
-                  </span>
-                  <span className={`text-xl font-medium transition-colors duration-300 ${selectedExplorer === step.id ? 'text-foreground' : 'text-muted'}`}>
-                    {step.title}
-                  </span>
-                </button>
+                <div key={step.id} className="flex flex-col gap-3 w-full">
+                  <button
+                    onClick={() => setSelectedExplorer(step.id)}
+                    className={`text-left p-6 rounded-2xl border transition-all duration-300 flex items-center gap-6 w-full ${
+                      selectedExplorer === step.id
+                        ? 'bg-card border-accent/40 shadow-md ring-1 ring-accent/15'
+                        : 'bg-card/25 border-border/40 hover:bg-card/50 hover:border-border/80'
+                    }`}
+                  >
+                    <span className={`text-2xl font-serif transition-colors duration-300 ${selectedExplorer === step.id ? 'text-accent' : 'text-muted/50'}`}>
+                      0{step.id}
+                    </span>
+                    <span className={`text-xl font-medium transition-colors duration-300 ${selectedExplorer === step.id ? 'text-foreground' : 'text-muted'}`}>
+                      {step.title}
+                    </span>
+                  </button>
+
+                  {/* Inline Mobile Preview Card */}
+                  {selectedExplorer === step.id && (
+                    <div className="lg:hidden w-full bg-card/75 border border-border rounded-[2rem] p-5 shadow-lg relative overflow-hidden mb-4 animate-in slide-in-from-top-4 duration-300">
+                      {/* Header bar representing the secure space */}
+                      <div className="flex justify-between items-center mb-4 border-b border-border/60 pb-3">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 text-accent">
+                              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                          </div>
+                          <span className="text-[9px] font-semibold tracking-wider text-accent uppercase">Personal Sanctuary</span>
+                        </div>
+                        <span className="text-[9px] font-medium text-muted bg-background border border-border px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Live Preview
+                        </span>
+                      </div>
+                      
+                      {/* Interactive Workspace Area */}
+                      <div className="bg-background/50 border border-border/50 rounded-2xl p-4 shadow-inner">
+                        {renderHelpPreview(selectedExplorer)}
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
 
             {/* Workspace UI Right */}
-            <div className="w-full lg:w-1/2 flex justify-center">
+            <div className="hidden lg:flex w-full lg:w-1/2 justify-center">
               <div className="relative w-full max-w-[420px]">
                 {/* Background glow */}
                 <div className="absolute inset-0 bg-accent/5 blur-[80px] rounded-full scale-125 pointer-events-none"></div>

@@ -65,7 +65,7 @@ function FeatureShowcase() {
                     </div>
 
                     {isExpanded && (
-                      <div className="animate-in fade-in duration-500 mb-6 flex-grow flex flex-col">
+                      <div className="hidden md:flex animate-in fade-in duration-500 mb-6 flex-grow flex-col">
                         <h4 className="text-sm font-medium text-foreground mb-3 uppercase tracking-wider">Capabilities</h4>
                         <ul className="space-y-2 mb-8">
                           {feature.capabilities.map((cap, i) => (
@@ -94,7 +94,7 @@ function FeatureShowcase() {
                   {isExpanded && (
                     <div 
                       onClick={(e) => e.stopPropagation()}
-                      className="animate-in fade-in slide-in-from-right-8 duration-500 md:w-[55%] flex flex-col mt-8 md:mt-0 cursor-default"
+                      className="hidden md:flex animate-in fade-in slide-in-from-right-8 duration-500 md:w-[55%] flex-col mt-8 md:mt-0 cursor-default"
                     >
                       <div className="flex justify-between items-center mb-4 border-b border-border/50 pb-2">
                         <h4 className="text-sm font-medium text-foreground uppercase tracking-wider">Interactive Preview</h4>
@@ -122,6 +122,64 @@ function FeatureShowcase() {
           })}
         </div>
       </div>
+
+      {/* Mobile Bottom Sheet Drawer */}
+      {expandedCard !== null && (
+        <div className="md:hidden fixed inset-0 z-50 pointer-events-none">
+          {/* Blur Backdrop */}
+          <div 
+            onClick={() => setExpandedCard(null)} 
+            className="absolute inset-0 bg-background/60 backdrop-blur-md pointer-events-auto transition-opacity duration-300 animate-in fade-in"
+          />
+          
+          {/* Drawer content panel */}
+          <div className="absolute inset-x-0 bottom-0 max-h-[85vh] bg-card border-t border-border rounded-t-[2.5rem] p-6 shadow-2xl pointer-events-auto flex flex-col animate-in slide-in-from-bottom duration-300 overflow-y-auto">
+            {/* Pull tab handle */}
+            <div className="w-12 h-1 bg-border rounded-full mx-auto mb-6 shrink-0" />
+            
+            {(() => {
+              const activeFeature = features.find(f => f.id === expandedCard);
+              if (!activeFeature) return null;
+              return (
+                <div className="flex flex-col h-full text-left">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="bg-background w-12 h-12 flex items-center justify-center rounded-xl border border-border shrink-0 shadow-sm text-2xl">
+                      {activeFeature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-medium text-foreground mb-1">{activeFeature.title}</h3>
+                      <p className="text-xs text-muted leading-relaxed">{activeFeature.description}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <h4 className="text-xs font-semibold text-foreground mb-3 uppercase tracking-wider">Planned Capabilities</h4>
+                    <ul className="grid grid-cols-1 gap-2">
+                      {activeFeature.capabilities.map((cap, i) => (
+                        <li key={i} className="flex items-center gap-2 text-xs text-muted">
+                          <span className="text-accent">•</span> {cap}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Preview Wrapper */}
+                  <div className="bg-background border border-border rounded-2xl p-4 shadow-inner mb-6">
+                    {activeFeature.renderPreview()}
+                  </div>
+
+                  <button 
+                    onClick={() => setExpandedCard(null)}
+                    className="w-full py-3.5 bg-foreground text-background font-medium rounded-full text-xs hover:bg-foreground/90 transition-colors shadow-sm mt-auto"
+                  >
+                    Close Preview
+                  </button>
+                </div>
+              );
+            })()}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

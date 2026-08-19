@@ -75,7 +75,7 @@ function Hero() {
               <h4 className="text-lg font-medium text-foreground mb-6">Your health space</h4>
 
               {/* Tabs */}
-              <div className="flex overflow-x-auto gap-2 pb-2 mb-6 scrollbar-hide">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {[
                   { id: 'cycle', label: 'Cycle' },
                   { id: 'learn', label: 'Learn' },
